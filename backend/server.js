@@ -12,10 +12,7 @@ if (!MONGODB_URI) {
 
 async function start() {
   try {
-    await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(MONGODB_URI);
     console.log('✅  MongoDB connected');
 
     app.listen(PORT, () => {
