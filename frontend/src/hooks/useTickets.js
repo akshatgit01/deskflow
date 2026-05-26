@@ -23,7 +23,13 @@ export function useTickets(filters = {}) {
       setTickets(ticketData);
       setStats(statsData);
     } catch (err) {
-      setError(err.message || 'Failed to connect to the server. Is the backend running?');
+      const msg = err.message || '';
+      const isJsonErr = msg.includes('<!DOCTYPE') || msg.includes('is not valid JSON') || msg.includes('JSON');
+      setError(
+        isJsonErr
+          ? '⚠ Backend not connected — No API server found at the configured URL. Deploy the backend on Render and set VITE_API_URL in Netlify environment variables, then redeploy.'
+          : msg || 'Failed to connect to the server. Is the backend running?'
+      );
     } finally {
       setLoading(false);
     }
