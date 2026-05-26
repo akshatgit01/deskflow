@@ -1,0 +1,110 @@
+/* ══ Board ══ */
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+@media (max-width: 1100px) {
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .board {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Column */
+.board-column {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.board-column__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg-secondary);
+  z-index: 1;
+}
+
+.board-column__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.board-column__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.board-column[data-status='open']        .board-column__dot { background: var(--status-open); }
+.board-column[data-status='in_progress'] .board-column__dot { background: var(--status-in-progress); }
+.board-column[data-status='resolved']    .board-column__dot { background: var(--status-resolved); }
+.board-column[data-status='closed']      .board-column__dot { background: var(--status-closed); }
+
+.board-column[data-status='open']        .board-column__title { color: var(--status-open); }
+.board-column[data-status='in_progress'] .board-column__title { color: var(--status-in-progress); }
+.board-column[data-status='resolved']    .board-column__title { color: var(--status-resolved); }
+.board-column[data-status='closed']      .board-column__title { color: var(--status-closed); }
+
+.board-column__count {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  min-width: 24px;
+  text-align: center;
+}
+
+.board-column__body {
+  flex: 1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.board-column__empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.board-column__empty-icon {
+  font-size: 2rem;
+  opacity: 0.4;
+}
